@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "CATEGORY")
-public class Category {
+public class Category extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -23,7 +23,7 @@ public class Category {
 
     @ManyToOne
     @JoinColumn(name = "PARENT_ID")
-    private Category category;
+    private Category parent;
 
     @OneToMany(mappedBy = "parent")
     private List<Category> child = new ArrayList<Category>();
@@ -62,12 +62,12 @@ public class Category {
         this.items = items;
     }
 
-    public Category getCategory() {
-        return category;
+    public Category getParent() {
+        return parent;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setParent(Category parent) {
+        this.parent = parent;
     }
 
     public List<Category> getChild() {
