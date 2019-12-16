@@ -1,5 +1,7 @@
 package com.hu.demo.model.entity;
 
+import com.hu.demo.model.entity.item.Item;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +17,8 @@ public class Category extends BaseEntity {
 
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "CATEGORY_ITEM",
-            joinColumns = @JoinColumn(name = "CATEGORY_ID"),
-            inverseJoinColumns = @JoinColumn(name = "ITEM_ID"))
-    private List<Item> items = new ArrayList<Item>();
+    @OneToMany(mappedBy = "category")
+    private List<CategoryItem> categoryItems = new ArrayList<CategoryItem>();
 
     @ManyToOne
     @JoinColumn(name = "PARENT_ID")
@@ -34,8 +33,9 @@ public class Category extends BaseEntity {
         child.setParent(this);
     }
 
-    public void addItem(Item item) {
-        items.add(item);
+    public void addCategoryItem(CategoryItem categoryItem) {
+        categoryItems.add(categoryItem);
+        categoryItem.setCategory(this);
     }
 
     public Long getId() {
@@ -52,14 +52,6 @@ public class Category extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
     }
 
     public Category getParent() {

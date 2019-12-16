@@ -69,10 +69,6 @@ public class Order extends BaseEntity {
         this.status = status;
     }
 
-    public enum OrderStatus {
-        ORDER, CANCEL
-    }
-
     public Member getMember() {
         return member;
     }

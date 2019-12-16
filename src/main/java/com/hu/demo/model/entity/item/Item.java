@@ -1,13 +1,12 @@
-package com.hu.demo.model.entity;
+package com.hu.demo.model.entity.item;
+
+import com.hu.demo.model.entity.BaseEntity;
+import com.hu.demo.model.entity.CategoryItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @MappedSuperclass
 public abstract class Item extends BaseEntity {
@@ -19,8 +18,14 @@ public abstract class Item extends BaseEntity {
     private int price;
     private int stockQuantity;
 
-    @ManyToMany(mappedBy = "items")
-    private List<Category> categories = new ArrayList<Category>();
+    @OneToMany(mappedBy = "item")
+    private List<CategoryItem> categoryItems = new ArrayList<CategoryItem>();
+
+    //==연관관계 메소드==//
+    public void addCategoryItem(CategoryItem categoryItem) {
+        categoryItems.add(categoryItem);
+        categoryItem.setItem(this);
+    }
 
     // Getter Setter
 

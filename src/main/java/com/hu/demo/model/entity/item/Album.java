@@ -1,4 +1,4 @@
-package com.hu.demo.model.entity;
+package com.hu.demo.model.entity.item;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;

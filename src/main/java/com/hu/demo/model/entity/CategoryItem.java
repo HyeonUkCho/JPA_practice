@@ -1,5 +1,7 @@
 package com.hu.demo.model.entity;
 
+import com.hu.demo.model.entity.item.Item;
+
 import javax.persistence.*;
 
 @Entity
